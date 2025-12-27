@@ -5,7 +5,7 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/turboline-ai/tsln-golang.svg)](https://pkg.go.dev/github.com/turboline-ai/tsln-golang)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## 🎯 Overview
+## Overview
 
 TSLN achieves **74% token reduction** compared to JSON through intelligent compression strategies optimized for time-series data sent to Large Language Models (LLMs).
 
@@ -18,13 +18,13 @@ TSLN achieves **74% token reduction** compared to JSON through intelligent compr
 - **LLM-compatible** text-based format
 - **Zero dependencies** - uses only Go standard library
 
-## 📦 Installation
+## Installation
 
 ```bash
 go get github.com/turboline-ai/tsln-golang
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ```go
 package main
@@ -88,7 +88,7 @@ func main() {
 }
 ```
 
-## 📊 Performance
+## Performance
 
 ### Compression Results
 
@@ -112,7 +112,7 @@ func main() {
 
 **Annual Savings: $10,820 (74% reduction)**
 
-## 🔧 API Reference
+## API Reference
 
 ### `ConvertToTSLN(dataPoints []DataPoint, options ...Config) (*TSLNResult, error)`
 
@@ -177,7 +177,7 @@ fmt.Printf("Best format: %s\n", comparison.BestFormat)
 fmt.Printf("Savings: %d%%\n", comparison.Savings)
 ```
 
-## 📖 Configuration
+## Configuration
 
 ```go
 type Config struct {
@@ -207,7 +207,7 @@ const (
 )
 ```
 
-## 💡 How It Works
+## How It Works
 
 TSLN uses four key strategies:
 
@@ -216,7 +216,7 @@ TSLN uses four key strategies:
 3. **Repeat Markers**: `BTC, BTC, BTC` → `BTC, =, =`
 4. **Schema-First Design**: Define structure once, not per record
 
-## ✅ Use Cases
+## Use Cases
 
 ### Ideal For:
 - Real-time cryptocurrency/stock analytics
@@ -231,14 +231,14 @@ TSLN uses four key strategies:
 - Human-readable exports
 - Legacy system integration (without converters)
 
-## 📚 Documentation
+## Documentation
 
 - **[Full Specification](./docs/README.md)** - Complete technical specification
 - **[Quick Reference](./docs/Reference.md)** - Quick start guide with common patterns
 - **[GitHub Repository](https://github.com/turboline-ai/tsln-go)** - Source code and examples
 - **[Go Package Docs](https://pkg.go.dev/github.com/turboline-ai/tsln-go)** - API documentation
 
-## 🧪 Testing
+## Testing
 
 Run the test suite:
 
@@ -258,7 +258,7 @@ Run the demo:
 go run examples/demo.go
 ```
 
-## 🚀 Building
+## Building
 
 ```bash
 # Build
@@ -268,21 +268,21 @@ go build
 go install
 ```
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
-## 📄 License
+## License
 
 MIT License - see [LICENSE](LICENSE) file for details
 
-## 🏢 About
+## About
 
 Developed by the Turboline team to reduce AI token costs by 74% for real-time analytics applications.
 
 **Contact:** dev@turboline.ai
 
-## 🔗 Links
+## Links
 
 - **Go Package**: [pkg.go.dev/github.com/turboline-ai/tsln-go](https://pkg.go.dev/github.com/turboline-ai/tsln-go)
 - **GitHub**: [turboline-ai/tsln-go](https://github.com/turboline-ai/tsln-go)
@@ -291,4 +291,4 @@ Developed by the Turboline team to reduce AI token costs by 74% for real-time an
 
 ---
 
-**Made with ❤️ by Turboline**
+**Made by Turboline**

@@ -9,6 +9,8 @@
 
 TSLN achieves **74% token reduction** compared to JSON through intelligent compression strategies optimized for time-series data sent to Large Language Models (LLMs).
 
+**[Read our whitepaper](https://github.com/turboline-ai/tsln/blob/main/TSLN_Whitepaper.pdf)**
+
 ### Key Benefits
 
 - **74% token reduction** vs JSON

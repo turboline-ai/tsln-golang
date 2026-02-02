@@ -1,7 +1,9 @@
 package tsln
 
 import (
+	"encoding/json"
 	"math"
+	"reflect"
 	"time"
 )
 
@@ -96,7 +98,22 @@ func analyzeField(fieldName string, values []interface{}) FieldTypeAnalysis {
 	// Count unique values
 	uniqueValues := make(map[interface{}]bool)
 	for _, v := range nonNullValues {
-		uniqueValues[v] = true
+		// Check if value is hashable before using as map key
+		// Slices, maps, and functions are not hashable in Go
+		hashableValue := v
+		if v != nil {
+			switch reflect.TypeOf(v).Kind() {
+			case reflect.Slice, reflect.Map, reflect.Func:
+				// Convert unhashable types to JSON string for uniqueness tracking
+				jsonBytes, err := json.Marshal(v)
+				if err != nil {
+					// If marshaling fails, skip this value
+					continue
+				}
+				hashableValue = string(jsonBytes)
+			}
+		}
+		uniqueValues[hashableValue] = true
 	}
 	uniqueValueCount := len(uniqueValues)
 

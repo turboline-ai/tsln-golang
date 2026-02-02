@@ -408,6 +408,60 @@ func TestNullValues(t *testing.T) {
 	assert.Contains(t, result.TSLN, "∅")
 }
 
+func TestConvertToTSLN_WithArrayFields(t *testing.T) {
+	baseTime := time.Date(2025, 12, 27, 10, 0, 0, 0, time.UTC)
+
+	// Test with array/slice fields that previously caused panic
+	data := []BufferedDataPoint{
+		{
+			Timestamp: baseTime,
+			Data: map[string]interface{}{
+				"name":        "test1",
+				"tags":        []string{"tag1", "tag2"},
+				"items":       []interface{}{1, 2, 3},
+				"product_ids": []string{"BTC-USD", "ETH-USD"},
+			},
+		},
+		{
+			Timestamp: baseTime.Add(1 * time.Second),
+			Data: map[string]interface{}{
+				"name":        "test2",
+				"tags":        []string{"tag3", "tag4"},
+				"items":       []interface{}{4, 5, 6},
+				"product_ids": []string{"BTC-USD", "ETH-USD"},
+			},
+		},
+	}
+
+	// This should not panic
+	result, err := ConvertToTSLN(data, nil)
+	require.NoError(t, err)
+	assert.NotEmpty(t, result.TSLN)
+	assert.Contains(t, result.TSLN, "# TSLN/1.0")
+}
+
+func TestConvertToTSLN_WithMapFields(t *testing.T) {
+	baseTime := time.Date(2025, 12, 27, 10, 0, 0, 0, time.UTC)
+
+	// Test with map fields that are also unhashable
+	data := []BufferedDataPoint{
+		{
+			Timestamp: baseTime,
+			Data: map[string]interface{}{
+				"name": "test",
+				"metadata": map[string]interface{}{
+					"key1": "value1",
+				},
+			},
+		},
+	}
+
+	// This should not panic
+	result, err := ConvertToTSLN(data, nil)
+	require.NoError(t, err)
+	assert.NotEmpty(t, result.TSLN)
+}
+
 func BenchmarkConvertToTSLN(b *testing.B) {
 	baseTime := time.Date(2025, 12, 27, 10, 0, 0, 0, time.UTC)
 	data := make([]BufferedDataPoint, 500)
